@@ -21,11 +21,19 @@
 				<p class="blue">Время работы с 09:00 до 21:00<br />без перерыва и выходных</p>
 			</div>
 			<div class="cart">
+				{% load my_filters %}
+				{% with total_items=cart|length %}
+          		{% if cart|length > 0 %}
 				<p class="cart_title">Корзина</p>
 				<p class="blue">Текущий заказ</p>
+				<p>В корзине <span>{{ total_items }}</span> {{ total_items|declension_of_products }}<br/>на сумму <span>{{ cart.get_total_price }}</span> руб.</p>
 
-				<p>В корзине <span>#</span> #<br />на сумму <span>#</span> руб.</p>
-				<a href="#">Перейти в корзину</a>
+				<a href="{% url 'cart:cart_detail' %}">Перейти в корзину</a>
+          			{% else %}
+				<h3>Корзина пуста.</h3>
+          			{% endif %}
+        			{% endwith %}
+
 			</div>
 		</div>
 		<div id="topmenu">

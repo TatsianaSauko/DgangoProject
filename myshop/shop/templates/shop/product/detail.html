@@ -36,7 +36,6 @@
                 <p>Год издательства: <span>{{ product.year }}</span></p>
                 <p>Жанр: <span>{{ product.category.name }}</span></p>
                 <p>Страниц: <span>{{ product.pages_num }}</span></p>
-
                 <table>
                     <tr>
                         <td>
@@ -44,11 +43,22 @@
                         </td>
                         <td>
                             <p>
-                                <a class="link_cart" href="{{ product.category.get_absolute_url }}"></a>
+                               <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                {{ cart_product_form }}
+                                {% csrf_token %}
+                            <table>
+                            <tr>
+                            <td>
+                            <input class="link_cart" type="submit" value="">
+                            </td>
+                            </tr>
+                                </table>
+                                </form>
                             </p>
                         </td>
                     </tr>
                 </table>
+
             </td>
         </tr>
         <tr>

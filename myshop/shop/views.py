@@ -13,6 +13,7 @@ def product_list(request, category_slug=None):
 
     products = Product.objects.filter(available=True).order_by(
         get_order_by_products(request))
+
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -57,30 +58,32 @@ def contacts(request):
     )
 
 
-# def product_detail(request, id, slug):
-#     product = get_object_or_404(Product,
-#                                 id=id,
-#                                 slug=slug,
-#                                 available=True)
-#     cart_product_form = CartAddProductForm()
-#     return render(request,
-#                   'shop/product/detail.html',
-#                   {'product': product,
-#                    'cart_product_form': cart_product_form})
-
-
-class ProductDetailView(generic.DetailView):
-    model = Product
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product,
+                                id=id,
+                                slug=slug,
+                                available=True)
     cart_product_form = CartAddProductForm()
+    return render(request,
+                  'shop/product/detail.html',
+                  {'product': product,
+                   'cart_product_form': cart_product_form})
 
-    def get_context_data(self, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(**kwargs)
-        context['products'] = Product.objects. \
-                                  filter(
-            category__exact=self.get_object().category). \
-                                  exclude(id=self.get_object().id).order_by(
-            '?')[:4]
-        return context
+
+# class ProductDetailView(generic.DetailView):
+#     model = Product
+#     cart_product_form = CartAddProductForm()
+#
+#     template_name = 'shop/product/detail.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(ProductDetailView, self).get_context_data(**kwargs)
+#         context['products'] = Product.objects. \
+#                                   filter(
+#             category__exact=self.get_object().category). \
+#                                   exclude(id=self.get_object().id).order_by(
+#             '?')[:4]
+#         return context
 
 
 def handler404(request, exception):

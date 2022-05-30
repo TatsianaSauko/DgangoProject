@@ -7,13 +7,12 @@
             <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
         </p>
         <p class="price">{{ product.price }} руб.</p>
-        <p>
-            <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                {{ cart_product_form }}
-                {% csrf_token %}
-            <input class="link_cart" type="submit" value="">
-            </form>
 
-        </p>
+<!--        <form action="{% url 'cart:cart_add' product.id %}" method="post">-->
+<!--        {{ cart_product_form }}-->
+<!--        {% csrf_token %}-->
+<!--        <input class="link_cart" type="submit" value="">-->
+<!--        </form>-->
+
     </div>
 </td>
