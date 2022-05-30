@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	{% block title %}<title>Интернет-магазин</title>{% endblock %}
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% block description %}<meta name="description" content="Интернет-магазин по продаже книг." />{% endblock %}
+	{% block keywords %}
+		<meta name="keywords" content="интернет магазин, интернет магазин книг" />
+	{% endblock %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" />
+	<script type="text/javascript" src="{% static 'js/functions.js' %}"></script>
+	<link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<img src="{% static 'images/header.png' %}" alt="Шапка" />
+			<div>
+				<p class="red">8-017-232-13-29</p>
+				<p class="blue">Время работы с 09:00 до 21:00<br />без перерыва и выходных</p>
+			</div>
+			<div class="cart">
+				<p class="cart_title">Корзина</p>
+				<p class="blue">Текущий заказ</p>
+
+				<p>В корзине <span>#</span> #<br />на сумму <span>#</span> руб.</p>
+				<a href="#">Перейти в корзину</a>
+			</div>
+		</div>
+		<div id="topmenu">
+			<ul>
+				<li>
+					<a href="{% url 'shop:product_list' %}">ГЛАВНАЯ</a>
+				</li>
+				<li>
+					<img src="{% static 'images/topmenu_border.png' %}" alt="" />
+				</li>
+				<li>
+					<a href="{% url 'shop:delivery' %}">ОПЛАТА И ДОСТАВКА</a>
+				</li>
+				<li>
+					<img src="{% static 'images/topmenu_border.png' %}" alt="" />
+				</li>
+				<li>
+					<a href="{% url 'shop:contacts' %}">КОНТАКТЫ</a>
+				</li>
+			</ul>
+			<div id="search">
+				<form name="search" action="{% url 'shop:search' %}" method="get">
+					<table>
+						<tr>
+							<td class="input_left"></td>
+							<td>
+								{{ search_form.q }}
+							</td>
+							<td class="input_right"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<div id="content">
+			<div id="left">
+				<div class="menu">
+					<div class="header">
+						<h3>Разделы</h3>
+					</div>
+					<div class="items">
+						{% for c in categories %}
+							<p>
+								<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+							</p>
+						{% endfor %}
+					</div>
+					<div class="bottom"></div>
+				</div>
+				<div class="menu">
+					<div class="header">
+						<h3>Пользователь</h3>
+					</div>
+					<div class="items">
+
+							<p>
+								<a href="#">Заказы</a>
+							</p>
+							<p>
+								<a href="#">Выход</a>
+							</p>
+
+							<p>
+								<a href="#">Вход</a>
+							</p>
+
+					</div>
+					<div class="bottom"></div>
+				</div>
+			</div>
+			<div id="right">
+				{% block before_content %}{% endblock %}
+				{% block content %}{% endblock %}
+				{% block pagination %}{% endblock %}
+			</div>
+			<div class="clear"></div>
+			<div id="footer">
+				<div id="pm">
+					<table>
+						<tr>
+							<td>Способы оплаты:</td>
+							<td>
+								<img src="{% static 'images/pm.png' %}" alt="Способы оплаты" />
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="copy">
+					<p>Copyright &copy; Booksite.by Все права защищены.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

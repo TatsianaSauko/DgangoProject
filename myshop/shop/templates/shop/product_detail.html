@@ -1,0 +1,75 @@
+{% extends "shop/base.html" %}
+{% block title %}<title>{{ product.name }}</title>{% endblock %}
+{% block description %}
+    <meta name="description" content="Описание и покупка книги {{ product.name }}." />
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="описание книги {{ product.name|lower }}, купить книгу {{ product.name|lower }}" />
+{% endblock %}
+{% block content %}
+    <table id="hornav">
+        <tr>
+            {% load static %}
+            <td>
+                <a href="{% url 'shop:product_list' %}">Главная</a>
+            </td>
+            <td>
+                <img src="{% static 'images/hornav_arrow.png' %}" alt="" />
+            </td>
+            <td>
+                <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>
+            </td>
+            <td>
+                <img src="{% static 'images/hornav_arrow.png' %}" alt="" />
+            </td>
+            <td>{{ product.name }}</td>
+        </tr>
+    </table>
+    <table id="product">
+        <tr>
+            <td class="product_img">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+            </td>
+            <td class="product_desc">
+                <p>Название: <span class="title">{{ product.name }}</span></p>
+                <p>Автор: <span>{{ product.author }}</span></p>
+                <p>Год издательства: <span>{{ product.year }}</span></p>
+                <p>Жанр: <span>{{ product.category.name }}</span></p>
+                <p>Страниц: <span>{{ product.pages_num }}</span></p>
+
+                <table>
+                    <tr>
+                        <td>
+                            <p class="price">{{ product.price }} руб.</p>
+                        </td>
+                        <td>
+                            <p>
+                                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                    {{ cart_product_form }}
+                                    {% csrf_token %}
+                                    <input class="link_cart" type="submit" value="">
+                                 </form>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p class="desc_title">Описание:</p>
+                <p class="desc">{{ product.description|linebreaksbr }}</p>
+            </td>
+        </tr>
+    </table>
+    <div id="others">
+        <h3>С этим товаром также заказывают:</h3>
+        <table class="products">
+            <tr>
+                {% for other_product in products %}
+                    {% include 'shop/product.html' with product=other_product %}
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+{% endblock %}
