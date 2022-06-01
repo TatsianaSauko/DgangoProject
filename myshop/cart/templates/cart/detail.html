@@ -7,9 +7,9 @@
 {% endblock %}
 {% block content %}
 <div id="cart">
-    {% if cart %}
-    <h2>Корзина</h2>
 
+    <h2>Корзина</h2>
+    {% if cart %}
     <table>
         <tr>
             <td colspan="8" id="cart_top"></td>
@@ -72,20 +72,15 @@
             <td colspan="6">
                 <table>
                     <tr>
-                        <td>Введите номер купона со скидкой<br/><span>(если есть)</span>
+                        <form action="{% url 'coupons:apply' %}" method="post">
                         </td>
-                        <td>
-                            <input type="text" name="discount"
-                                   value="{{ discount }}"/>
-                        </td>
+                            {{ coupon_apply_form }}
+                            {% csrf_token %}
                         <td>
                             {% load static %}
-                            <input type="image"
-                                   src="{% static 'images/cart_discount.png' %}"
-                                   alt="Получить скидку"
-                                   onmouseover="this.src='{% static 'images/cart_discount_active.png' %}'"
-                                   onmouseout="this.src='{% static 'images/cart_discount.png' %}'"/>
+                            <input type="submit" value="Применить">
                         </td>
+                        </form>
                     </tr>
                 </table>
             </td>
@@ -94,8 +89,13 @@
         <tr id="summa">
             <td class="cart_left"></td>
             <td colspan="6">
-                <p>Итого{% if discount %} со скидкой{% endif %}: <span>{{ cart.get_total_price }} руб.</span>
+                <p>Итого:
+                    <span>{{ cart.get_total_price }} руб.</span>
                 </p>
+                <p>Итого{% if cart.coupon %} со скидкой:
+                <span>{{ cart.get_total_price_after_discount|floatformat:"2" }} руб.</span>
+                    {% endif %}
+
             </td>
             <td class="cart_right"></td>
         </tr>
@@ -112,7 +112,7 @@
             </td>
             <td colspan="4">
                 <div class="right">
-                    <a href="№">
+                    <a href="{% url 'orders:order_create' %}">
                         <img src="{% static 'images/cart_order.png' %}"
                              alt="Оформить заказ"
                              onmouseover="this.src='{% static 'images/cart_order_active.png' %}'"
