@@ -15,9 +15,9 @@ class Order(models.Model):
     address = models.CharField(max_length=250, blank=True, verbose_name='Адрес')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата заказа')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
-    need_delivery = models.BooleanField(verbose_name='Необходима доставка')
+    need_delivery = models.BooleanField(verbose_name='Доставка')
     notice = models.TextField(blank=True, verbose_name='Примечание к заказу')
-    paid = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False, verbose_name='Оплата')
     coupon = models.ForeignKey(Coupon,
                                related_name='orders',
                                null=True,
