@@ -38,7 +38,7 @@ def export_to_csv(modeladmin, request, queryset):
     return response
 
 
-export_to_csv.short_description = 'Export to CSV'
+export_to_csv.short_description = 'Экспорт в CSV'
 
 
 class OrderItemInline(admin.TabularInline):
@@ -51,15 +51,16 @@ def order_pdf(obj):
         reverse('orders:admin_order_pdf', args=[obj.id])))
 
 
-order_pdf.short_description = 'Invoice'
+order_pdf.short_description = 'Счет'
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'email',
-                    'address', 'created', 'updated', 'need_delivery', 'paid',
-                    order_detail, order_pdf]
+    list_display = ['id', 'display_products', 'first_name',
+                    'last_name', 'discount', 'get_total_cost',
+                    'email', 'address', 'created', 'need_delivery',
+                    'paid', 'status', order_detail, order_pdf]
     list_filter = ['paid', 'created', 'updated']
-    list_per_page = 5
+    list_per_page = 10
     inlines = [OrderItemInline]
     actions = [export_to_csv]

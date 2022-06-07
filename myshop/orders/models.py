@@ -26,18 +26,37 @@ class Order(models.Model):
     discount = models.IntegerField(default=0,
                                    validators=[MinValueValidator(0),
                                                MaxValueValidator(100)], verbose_name="Скидка")
+    STATUSES = [
+        ('NEW', 'Новый заказ'),
+        ('APR', 'Подтверждён'),
+        ('PAY', 'Оплачен'),
+        ('CNL', 'Отменён')
+    ]
+
+    status = models.CharField(choices=STATUSES, max_length=3, default='NEW',
+                              verbose_name='Статус')
 
     class Meta:
         ordering = ('-created',)
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        permissions = (('can_set_status', 'Возможность настройки статуса'),)
 
     def __str__(self):
         return 'Order {}'.format(self.id)
 
+    def display_products(self):
+        display = ''
+        for order_item in self.items.all():
+            display += '{0}: {1} шт.; '.format(order_item.product.name, order_item.quantity)
+        return display
+
     def get_total_cost(self):
         total_cost = sum(item.get_cost() for item in self.items.all())
-        return total_cost - total_cost * (self.discount / Decimal('100'))
+        return round(total_cost - total_cost * (self.discount / Decimal('100')), 2)
+
+    display_products.short_description = 'Состав заказа'
+    get_total_cost.short_description = 'Сумма'
 
 
 class OrderItem(models.Model):
