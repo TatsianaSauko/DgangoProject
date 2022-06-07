@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
 
 from .models import OrderItem
 from .forms import OrderCreateForm

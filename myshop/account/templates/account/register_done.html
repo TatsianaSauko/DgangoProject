@@ -1,0 +1,14 @@
+{% extends 'shop/base.html' %}
+{% block title %}<title>Восстановление пароля</title>{% endblock %}
+{% block description %}<meta name="description" content="Регистрация пользователя." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="регистрация" />
+{% endblock %}
+{% block content %}
+    <div id="article">
+        <h2>Добро пожаловать {{ new_user.first_name }}!</h2>
+        <p>
+            Ваша учетная запись успешно создана. Теперь вы можете<a href="{% url 'login' %}">Вход</a>
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+{% block title %}<title>Авторизация</title>{% endblock %}
+{% block description %}<meta name="description" content="Регистрация пользователя." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="регистрация" />
+{% endblock %}
+{% block content %}
+<div id="order">
+    <h2>Регистрация</h2>
+    <form name="login" action="." method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p>Неверные имя пользователя и/или пароль!</p>
+        {% endif %}
+        {{ user_form.as_p }}
+        <input type="submit" value="Регистрация" />
+    </form>
+    <p><a href="{% url 'login' %}">Войти</a></p>
+    <p><a href="{% url 'password_reset' %}">Восстановить пароль</a></p>
+</div>
+{% endblock %}

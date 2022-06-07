@@ -6,6 +6,7 @@
 {% endblock %}
 {% block content %}
     <div id="article">
+        {% if orders %}
         <h2>Ваши заказы</h2>
         <table border="1" id="orders">
             <tr>
@@ -31,5 +32,8 @@
                 </tr>
             {% endfor %}
         </table>
+        {% else %}
+         <h2>У Вас нет ещё заказов!</h2>
+        {% endif %}
     </div>
 {% endblock %}
