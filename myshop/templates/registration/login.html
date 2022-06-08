@@ -27,6 +27,7 @@
     </form>
     <p><a href="{% url 'password_reset' %}">Восстановление пароля</a></p>
     <p><a href="{% url 'account:register' %}">Регистрация</a></p>
+    <p><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a></p>
 
 </div>
 {% endblock %}
