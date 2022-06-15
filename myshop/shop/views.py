@@ -70,22 +70,6 @@ def product_detail(request, id, slug):
                    'cart_product_form': cart_product_form})
 
 
-# class ProductDetailView(generic.DetailView):
-#     model = Product
-#     cart_product_form = CartAddProductForm()
-#
-#     template_name = 'shop/product/detail.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(ProductDetailView, self).get_context_data(**kwargs)
-#         context['products'] = Product.objects. \
-#                                   filter(
-#             category__exact=self.get_object().category). \
-#                                   exclude(id=self.get_object().id).order_by(
-#             '?')[:4]
-#         return context
-
-
 def handler404(request, exception):
     return render(request, '404.html', status=404)
 

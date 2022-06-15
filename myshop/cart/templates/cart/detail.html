@@ -70,9 +70,10 @@
         <tr id="discount">
             <td class="cart_left"></td>
             <td colspan="6">
+                 <form action="{% url 'coupons:apply' %}" method="post">
                 <table>
                     <tr>
-                        <form action="{% url 'coupons:apply' %}" method="post">
+
                         </td>
                             {{ coupon_apply_form }}
                             {% csrf_token %}
@@ -80,9 +81,10 @@
                             {% load static %}
                             <input type="submit" value="Применить">
                         </td>
-                        </form>
+
                     </tr>
                 </table>
+                     </form>
             </td>
             <td class="cart_right"></td>
         </tr>
@@ -92,7 +94,7 @@
                 <p>Итого:
                     <span>{{ cart.get_total_price }} руб.</span>
                 </p>
-                <p>Итого{% if cart.coupon %} со скидкой:
+                <p>{% if cart.coupon %}Итого со скидкой:
                 <span>{{ cart.get_total_price_after_discount|floatformat:"2" }} руб.</span>
                     {% endif %}
 
@@ -103,20 +105,13 @@
             <td class="cart_left"></td>
             <td colspan="2">
                 <div class="left">
-                    <a href="{% url 'shop:product_list' %}"><input type="image"
-                                                                   src="{% static 'images/cart_recalc.png' %}"
-                                                                   alt="Продолжить"
-                                                                   onmouseover="this.src='{% static 'images/cart_recalc_active.png' %}'"
-                                                                   onmouseout="this.src='{% static 'images/cart_recalc.png' %}'"/></a>
+                    <a href="{% url 'shop:product_list' %}"><input type="submit" value="Продолжить покупки"/></a>
                 </div>
             </td>
             <td colspan="4">
                 <div class="right">
                     <a href="{% url 'orders:order_create' %}">
-                        <img src="{% static 'images/cart_order.png' %}"
-                             alt="Оформить заказ"
-                             onmouseover="this.src='{% static 'images/cart_order_active.png' %}'"
-                             onmouseout="this.src='{% static 'images/cart_order.png' %}'"/>
+                        <input type="submit" value="Оформить заказ"/>
                     </a>
                 </div>
             </td>

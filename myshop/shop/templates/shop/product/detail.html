@@ -68,14 +68,4 @@
             </td>
         </tr>
     </table>
-    <div id="others">
-        <h3>С этим товаром также заказывают:</h3>
-        <table class="products">
-            <tr>
-                {% for other_product in products %}
-                    {% include 'shop/product.html' with product=other_product %}
-                {% endfor %}
-            </tr>
-        </table>
-    </div>
 {% endblock %}

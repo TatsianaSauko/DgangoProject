@@ -45,7 +45,11 @@ def order_create(request):
                           'orders/order/created.html',
                           {'order': order})
     else:
-        form = OrderCreateForm()
+        initial = {}
+        if request.user.is_authenticated:
+            initial = {'name': request.user.first_name,
+                       'email': request.user.email}
+        form = OrderCreateForm(initial=initial)
     return render(request,
                   'orders/order/create.html',
                   {'cart': cart, 'form': form})
