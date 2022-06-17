@@ -12,6 +12,7 @@ class OrderCreateForm(forms.ModelForm):
     )
     delivery = forms.TypedChoiceField(label='Доставка',
                                       choices=DELIVERY_CHOICES, coerce=int)
+
     class Meta:
         model = Order
         fields = ['first_name', 'last_name', 'phone', 'email', 'address', 'need_delivery', 'notice']

@@ -92,8 +92,11 @@ class ProductModelTest(TestCase):
 
     def test_price_max_digits(self):
         obj = Product.objects.get(id=1)
-        obj.price = 100000000000
-        self.assertRaises(ValidationError, obj.full_clean)
+        self.assertTrue(obj._meta.get_field('price').max_digits, 10)
+
+    def test_price_decimal_places(self):
+        obj = Product.objects.get(id=1)
+        self.assertTrue(obj._meta.get_field('price').decimal_places, 2)
 
     def test_price_verbose_name(self):
         obj = Product.objects.get(id=1)
