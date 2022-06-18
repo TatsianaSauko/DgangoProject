@@ -225,4 +225,3 @@ class OrderModelTest(TestCase):
         obj = Order.objects.get(id=1)
         short_description = obj.get_total_cost.short_description
         self.assertEqual(short_description, 'Сумма')
-

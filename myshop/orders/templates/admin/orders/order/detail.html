@@ -45,11 +45,11 @@
   </tr>
   <tr>
     <th>На сумму:</th>
-    <td>${{ order.get_total_cost }}</td>
+    <td>{{ order.get_total_cost }} руб.</td>
   </tr>
   <tr>
     <th>Статус:</th>
-    <td>{% if order.paid %}Оплачено{% else %}Ожидающий платеж{% endif %}</td>
+    <td>{% if order.paid %}Оплачено{% else %}Не оплачено{% endif %}</td>
   </tr>
 </table>
 
@@ -75,7 +75,7 @@
           </tr>
         {% endfor %}
         <tr class="total">
-          <td colspan="3">Стоимость</td>
+          <td colspan="3">Итого на сумму:</td>
           <td class="num">{{ order.get_total_cost }} руб.</td>
         </tr>
       </tbody>

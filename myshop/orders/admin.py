@@ -14,6 +14,9 @@ def order_detail(obj):
         reverse('orders:admin_order_detail', args=[obj.id])))
 
 
+order_detail.short_description = 'Детальнее'
+
+
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
     response = HttpResponse(content_type='text/csv')
