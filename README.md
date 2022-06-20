@@ -7,13 +7,13 @@
 3. Прописать следующие команды:
 
   
-  -- virtualenv venv (Создаём виртуальное окружение)
+  virtualenv venv (Создаём виртуальное окружение)
   
-  -- .\venv\Scripts\activate (Активируем виртуальное окружение)
+  .\venv\Scripts\activate (Активируем виртуальное окружение)
   
-  -- cd myshop (Переходим в директорию myshop)
+  cd myshop (Переходим в директорию myshop)
   
-  -- python manage.py migrate (Делаем миграцию)
+  python manage.py migrate (Делаем миграцию)
 
 4. python manage.py runserver (Запускаем сервер)
 5. В админке выбираем "Пользователи" и создаём группу "Клиенты"
