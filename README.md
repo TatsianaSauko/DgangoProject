@@ -8,8 +8,11 @@
 
   
   -- virtualenv venv (Создаём виртуальное окружение)
+  
   -- .\venv\Scripts\activate (Активируем виртуальное окружение)
+  
   -- cd myshop (Переходим в директорию myshop)
+  
   -- python manage.py migrate (Делаем миграцию)
 
 4. python manage.py runserver (Запускаем сервер)
