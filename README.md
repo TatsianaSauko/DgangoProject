@@ -8,4 +8,3 @@
 4. pip install -r requirements.txt
 5. python manage.py migrate
 6. python manage.py runserver
-7. В админке выбираем "Пользователи" и создаём группу "Клиенты"
