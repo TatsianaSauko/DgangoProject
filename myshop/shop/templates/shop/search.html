@@ -14,3 +14,9 @@
         {% endif %}
     </div>
 {% endblock %}
+
+{% block main_header %}
+    {% if products %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}

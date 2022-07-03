@@ -110,9 +110,10 @@ def orders(request):
     )
 
 
-@permission_required('orders.can_set_status')
+# @permission_required('orders.can_set_status')
+@login_required
 def cancelorder(request, order_id):
-    print(request.user.has_perm('orders.can_set_status'))
+    # print(request.user.has_perm('orders.can_set_status'))
     order = get_object_or_404(Order, id=order_id)
     if order.email == request.user.email and order.status == 'NEW':
         order.status = 'CNL'

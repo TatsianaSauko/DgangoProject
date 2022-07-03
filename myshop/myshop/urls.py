@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from social_django.models import Nonce, UserSocialAuth, Association
 
 admin.site.site_header = 'Администрирование сайта'
 admin.site.index_title = 'Booksite.by'
+admin.site.unregister(Nonce)
+admin.site.unregister(UserSocialAuth)
+admin.site.unregister(Association)
 
 
 urlpatterns = [
